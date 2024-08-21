@@ -11,13 +11,13 @@ Make sure you have the following installed:
 
 ## Installation
 
-You will need to create a `.env` file with the following environment variable:
+You will need to create a `.env` file in the project directory with the following environment variable:
 
 ### `REACT_APP_ACCESS_TOKEN=your-access-token`
 
 You can create a personal access token using the following instructions
 `https://www.howtogeek.com/devops/how-to-set-up-https-personal-access-tokens-for-github-authentication/`
-the token will have to have access read-only access to users
+the token will have to have READ ALL access to users
 
 In the project directory, you can run:
 
@@ -38,5 +38,7 @@ I used React.memo for the UserList component. I honestly think that it is overki
 I moved the SEARCH_USERS and interfaces from the UserList component into their own files in a `utils` folder. Again this is probably overkill for such a small app, but in production I where interfaces and queries might be shared between different components I think it would make sense.
 
 I did run into an issue where users without a databaseId were returned, when searching `zero` for example (my username is ZeroAuto) several empty nodes were returned which results in a key error. I spent some time looking thru the documentation and couldn't find any way to skip users without a databaseId in the returned data. It might make sense to filter out these users on the client side.
+
+I used Tailwind for styling primarily because it's the library I have been using for projects recently so it's fresh in my mind, but also so I could reuse a couple of components and styles that I commonly use in projects such as the loading spinner component and primary button style.
 
 I had planned to set up a test suite but ran into some errors mocking the graphql query so rather than spend an hour or more trying to debug things I just skipped the tests. I will put the tests into a separate branch and leave a comment above the one that is failing. I think I'm probably just missing something simple so if y'all want to take a look and see if you can spot the issue please let me know.
