@@ -1,16 +1,18 @@
 import React from 'react';
 
-interface UserNode {
-  databaseId: string;
-  login: string;
-  name: string;
-  url: string;
-  avatarUrl: string;
-}
+import { UserListProps } from '../utils/interfaces';
 
-interface UserListProps {
-  edges: Array<{ node: UserNode }>;
-}
+// interface UserNode {
+//   databaseId: string;
+//   login: string;
+//   name: string;
+//   url: string;
+//   avatarUrl: string;
+// }
+
+// interface UserListProps {
+//   edges: Array<{ node: UserNode }>;
+// }
 
 // memoizing this component is probably overkill for a small app
 // but since this component is potentially re-rendered a lot I 
