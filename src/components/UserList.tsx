@@ -6,7 +6,6 @@ interface UserNode {
   name: string;
   url: string;
   avatarUrl: string;
-  bio: string;
 }
 
 interface UserListProps {
