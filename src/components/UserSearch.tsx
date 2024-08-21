@@ -21,7 +21,6 @@ const SEARCH_USERS = gql`
             name
             url
             avatarUrl
-            bio
           }
         }
       }
