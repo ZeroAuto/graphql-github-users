@@ -1,4 +1,6 @@
-const LoadingSpinner = () => {
+import React from 'react';
+
+const LoadingSpinner: React.FC = () => {
   return (
     <div className="flex item-center mx-auto mb-4">
       <div
@@ -10,7 +12,7 @@ const LoadingSpinner = () => {
         </span>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default LoadingSpinner;
