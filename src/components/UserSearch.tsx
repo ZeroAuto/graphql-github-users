@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
-import { FaTimes } from 'react-icons/fa';  // Import the "X" icon from react-icons
+import { FaTimes } from 'react-icons/fa';
 
 import useDebounce from '../hooks/useDebounce';
 import LoadingSpinner from './LoadingSpinner';
@@ -14,6 +14,7 @@ const UserSearch: React.FC = () => {
   const { loading, error, data, fetchMore } = useQuery(SEARCH_USERS, {
     variables: {
       name: debouncedSearchTerm,
+      // set page size based on window height
       first: Math.floor((window.innerHeight - 160) / 56),
     },
     skip: debouncedSearchTerm.length < 3,
