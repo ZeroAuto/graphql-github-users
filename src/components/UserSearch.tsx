@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
+import { FaTimes } from 'react-icons/fa';  // Import the "X" icon from react-icons
 
 import useDebounce from '../hooks/useDebounce';
 import LoadingSpinner from './LoadingSpinner';
@@ -29,13 +30,12 @@ const SEARCH_USERS = gql`
 `;
 
 const UserSearch: React.FC = () => {
-  const [ searchTerm, setSearchTerm ] = useState<string>('');
+  const [searchTerm, setSearchTerm] = useState<string>('');
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
 
   const { loading, error, data, fetchMore } = useQuery(SEARCH_USERS, {
     variables: {
       name: debouncedSearchTerm,
-      // use the window height to determine page size
       first: Math.floor((window.innerHeight - 160) / 56),
     },
     skip: debouncedSearchTerm.length < 3,
@@ -66,16 +66,29 @@ const UserSearch: React.FC = () => {
     }
   };
 
+  const handleClear = () => {
+    setSearchTerm('');
+  };
+
   return (
     <div className="max-w-md mx-auto bg-gray-800 p-5 rounded-lg shadow-md text-white">
-      <div className="mb-4">
+      <div className="relative mb-4">
         <input
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search for users"
-          className="w-full border-gray-600 bg-gray-700 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-1"
+          className="w-full border-gray-600 bg-gray-700 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 pr-10"
         />
+        {searchTerm && (
+          <button
+            type="button"
+            onClick={handleClear}
+            className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer"
+          >
+            <FaTimes className="text-gray-400 hover:text-gray-600" />
+          </button>
+        )}
       </div>
       {error &&
         <div className="mb-4 p-4 bg-red-300 text-red-900 rounded border-red-900">
