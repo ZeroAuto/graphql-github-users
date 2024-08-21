@@ -1,32 +1,11 @@
 import React, { useState } from 'react';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { FaTimes } from 'react-icons/fa';  // Import the "X" icon from react-icons
 
 import useDebounce from '../hooks/useDebounce';
 import LoadingSpinner from './LoadingSpinner';
 import UserList from './UserList';
-
-const SEARCH_USERS = gql`
-  query SearchUsers($name: String!, $after: String, $first: Int!) {
-    search(query: $name, type: USER, first: $first, after: $after) {
-      pageInfo {
-        endCursor
-        hasNextPage
-      }
-      edges {
-        node {
-          ... on User {
-            databaseId
-            login
-            name
-            url
-            avatarUrl
-          }
-        }
-      }
-    }
-  }
-`;
+import { SEARCH_USERS } from '../utils/queries';
 
 const UserSearch: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
